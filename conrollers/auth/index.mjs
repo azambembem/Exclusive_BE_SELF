@@ -1,3 +1,4 @@
+// funksiyalar conrollers inchida
 import { hashPassword, verifyPassword } from "../../tools/password/index.mjs";
 import userModel from "../../models/users/index.mjs";
 import { generateToken } from "../../tools/jwt/index.mjs";
@@ -43,11 +44,12 @@ const sign_up = async (req, res, next) => {
     const {
       email,
       password,
-      first_name = "Not Provided",
-      last_name = "Not Provided"
+      first_name = "Not Provided", // schemada first_name required qilinganligi uchun
+      last_name = "Not Provided" // schemada last_name required qilinganligi uchun
     } = req.body;
 
     const hashedPassword = await hashPassword(password);
+    console.log(hashedPassword); // $2b$10$/CEk9cgzxk0p1Ahd2cNiC.2oY.1kLUAy.CRCfmmr4eWGmPDwvsHxa
 
     const user = new userModel({
       email,

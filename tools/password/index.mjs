@@ -8,6 +8,7 @@ const hashPassword = async (password) => {
 
 const verifyPassword = async (password, hashedPassword) => {
   const isMatch = await bcrypt.compare(password, hashedPassword);
+
   return isMatch;
 };
 

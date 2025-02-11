@@ -4,7 +4,7 @@ const userSchema = new Schema({
   create_at: {
     type: Date,
     default: Date.now(),
-    required: [true, "Created at date is required."],
+    required: [true, "Created at date is required."], // noto‘g‘ri yoki yetishmayotgan ma’lumotlar saqlanishining oldini olish mumkin
     immutable: [true, "Created at date is immutable."]
     // immimmutable: false bo‘lsa yoki immutable umuman qo‘shilmasa: //  name ham, email ham erkin o‘zgartirilishi mumkin.
   },
@@ -44,8 +44,9 @@ const userSchema = new Schema({
       "https://img.freepik.com/free-vector/anonymous-avatars-grey-circles_78370-2086.jpg?ga=GA1.1.917091214.1739122099&semt=ais_hybrid"
   }
 });
+// Yangilanish vaqtini avtomatlashtirish. yani create_at bn update_at
 userSchema.post("updateOne", async function () {
-  this.update_at = Date.now();
+  this.update_at = Date.now(); // post // pre updateOne ??
 });
 
 export default model("users", userSchema);

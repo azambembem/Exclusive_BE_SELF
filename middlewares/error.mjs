@@ -1,4 +1,4 @@
-// errror middleware
+// error middleware
 export const error_handler = (err, req, res) => {
   console.error(err.stack);
 

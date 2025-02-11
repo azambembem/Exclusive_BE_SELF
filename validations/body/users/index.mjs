@@ -1,3 +1,11 @@
+// bu code ni -> https://express-validator.github.io/docs/guides/schema-validation dan olib kelib ishlatilgan
+
+/*
+1. Noto‘g‘ri ma’lumotlarni oldindan tekshirish → Dastur ishlayotgan paytda noto‘g‘ri email yoki parol yuborilmasin.
+2. Kirishni xavfsiz qilish → Minimal parol uzunligi va to‘g‘ri email formatini talab qilish.
+3. Foydalanuvchiga tushunarli xabar berish → Xatolik bo‘lsa, foydalanuvchi nima noto‘g‘ri ekanini bilishi uchun errorMessage qaytariladi.
+*/
+
 export const sign_in_validator = {
   email: {
     errorMessage: "Invalid email",
@@ -8,7 +16,7 @@ export const sign_in_validator = {
       options: { min: 8 },
       errorMessage: "Password should be at least 8 chars"
     },
-    notEmpty: true,
+    notEmpty: true, //Parol kiritilmagan bo‘lsa, xatolik chiqadi.
     errorMessage: "Password is required"
   }
 };
