@@ -59,8 +59,13 @@ const productSchema = new Schema({
     required: true
   },
   colors: {
-    type: String,
-    enum: ["red", "green", "blue", "yellow", "orange", "purple"]
+    type: String
+  },
+  hashtags: {
+    // hashtags nima? productni turlixil nomlar bn search qilishga aytiladi.
+    type: Array,
+    required: true,
+    default: []
   }
 });
 

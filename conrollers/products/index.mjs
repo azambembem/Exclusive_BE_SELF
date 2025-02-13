@@ -58,7 +58,8 @@ export const update_product = async (req, res) => {
     total_count,
     total_sold,
     main_image,
-    images
+    images,
+    hashtags
   } = req.body;
 
   const product = await productModel.findById(id);
@@ -76,6 +77,7 @@ export const update_product = async (req, res) => {
   product.total_sold = total_sold || product.total_sold;
   product.main_image = main_image || product.main_image;
   product.images = images || product.images;
+  product.hashtags = hashtags || product.hashtags;
 
   const updatedProduct = await product.save();
 
@@ -94,42 +96,93 @@ export const delete_product = async (req, res) => {
   });
 };
 
-export const most_popular_products = async (req, res) => {
-  const popularProducts = await productModel
-    .find()
-    .sort({ total_sold: -1 }) // sort sartirofka qiliniyapti yani top eng ko'p sotilgan productlar
-    .limit(10) //  top eng ko'p sotilgan nechtaligi buyerda -> 10
-    .populate({
-      path: "category",
-      select: "name _id"
-    });
-  // .populate({
-  //   path: "created_by",
-  //   select: "name email"
-  // });
+export const most_popular_products = async (req, res, next) => {
+  try {
+    const popularProducts = await productModel
+      .find()
+      .sort({ total_sold: -1 }) // sort sartirofka qiliniyapti yani top eng ko'p sotilgan productlar
+      .limit(10) //  top eng ko'p sotilgan nechtaligi buyerda -> 10
+      .populate({
+        path: "category",
+        select: "name _id"
+      });
+    // .populate({
+    //   path: "created_by",
+    //   select: "name email"
+    // });
 
-  res.status(200).json({
-    success: true,
-    data: popularProducts
-  });
+    res.status(200).json({
+      success: true,
+      data: popularProducts
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
-export const most_popular_monthly_products = async (req, res) => {
-  const thisMonthlyProducts = await productModel
-    .find()
-    .sort({ total_sold: -1 })
-    .limit(10)
-    .populate({
+export const most_popular_monthly_products = async (req, res, next) => {
+  try {
+    const thisMonthlyProducts = await productModel
+      .find()
+      .sort({ total_sold: -1 })
+      .limit(10)
+      .populate({
+        path: "category",
+        select: "name _id"
+      });
+    // .populate({
+    //   path: "created_by",
+    //   select: "name email"
+    // });
+
+    res.status(200).json({
+      success: true,
+      data: thisMonthlyProducts
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+export const get_product_by_id = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const product = await productModel.findById(id).populate({
       path: "category",
       select: "name _id"
     });
-  // .populate({
-  //   path: "created_by",
-  //   select: "name email"
-  // });
 
-  res.status(200).json({
-    success: true,
-    data: thisMonthlyProducts
-  });
+    if (!product) throw new Error(`Product not found`);
+
+    res.status(200).json({
+      success: true,
+      data: product
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const get_related_products = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const product = await productModel.findById(id).populate({
+      path: "category",
+      select: "name _id"
+    });
+
+    if (!product) throw new Error(`Product not found`);
+
+    const reletedProduct = await productModel.find({
+      hashtags: { $in: product.hashtags }
+    });
+    res.status(200).json({
+      success: true,
+      data: reletedProduct
+    });
+  } catch (error) {
+    next(error);
+  }
 };
