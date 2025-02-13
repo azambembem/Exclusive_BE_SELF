@@ -5,9 +5,13 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
+  // created_by: {
+  //   type: SchemaTypes.ObjectId, // // SchemaTypes dan ObjectId ni oliyapti
+  //   ref: "users"
+  // },
   category: {
     type: SchemaTypes.ObjectId, // // SchemaTypes dan ObjectId ni oliyapti
-    ref: "categories"
+    ref: "category" // ??
   },
   star: {
     type: Number,
@@ -51,7 +55,7 @@ const productSchema = new Schema({
     required: true
   },
   images: {
-    type: Array,
+    type: Array, // array berishdan maqsad bir nechta rasmlarni solsa buladi.
     required: true
   },
   colors: {
@@ -65,6 +69,10 @@ const categorySchema = new Schema({
     type: String,
     required: true
   },
+  // created_by: {
+  //   type: SchemaTypes.ObjectId, // // SchemaTypes dan ObjectId ni oliyapti
+  //   ref: "users"
+  // },
   created_at: {
     type: Date,
     default: Date.now()

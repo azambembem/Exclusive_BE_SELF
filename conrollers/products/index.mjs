@@ -3,6 +3,7 @@ export const create_product = async (req, res) => {
   const {
     name,
     category,
+    // created_by,
     star,
     price,
     discount,
@@ -14,6 +15,7 @@ export const create_product = async (req, res) => {
   const newProduct = new productModel({
     name,
     category,
+    // created_by,
     star,
     price,
     discount,
@@ -32,9 +34,13 @@ export const create_product = async (req, res) => {
 
 export const get_product = async (req, res) => {
   const products = await productModel.find().populate({
-    path: "category",
-    select: "name _id"
+    path: "category", // ??
+    select: "name _id" // ??
   });
+  // .populate({
+  //   path: "created_by",
+  //   select: "name email"
+  // });
 
   res.status(200).json({
     success: true,
@@ -85,5 +91,45 @@ export const delete_product = async (req, res) => {
   return res.status(200).json({
     success: true,
     data: product
+  });
+};
+
+export const most_popular_products = async (req, res) => {
+  const popularProducts = await productModel
+    .find()
+    .sort({ total_sold: -1 }) // sort sartirofka qiliniyapti yani top eng ko'p sotilgan productlar
+    .limit(10) //  top eng ko'p sotilgan nechtaligi buyerda -> 10
+    .populate({
+      path: "category",
+      select: "name _id"
+    });
+  // .populate({
+  //   path: "created_by",
+  //   select: "name email"
+  // });
+
+  res.status(200).json({
+    success: true,
+    data: popularProducts
+  });
+};
+
+export const most_popular_monthly_products = async (req, res) => {
+  const thisMonthlyProducts = await productModel
+    .find()
+    .sort({ total_sold: -1 })
+    .limit(10)
+    .populate({
+      path: "category",
+      select: "name _id"
+    });
+  // .populate({
+  //   path: "created_by",
+  //   select: "name email"
+  // });
+
+  res.status(200).json({
+    success: true,
+    data: thisMonthlyProducts
   });
 };
