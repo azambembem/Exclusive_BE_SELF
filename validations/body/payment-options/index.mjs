@@ -1,8 +1,4 @@
 export const create_options_validator = {
-  email: {
-    errorMessage: "Invalid email",
-    isEmail: true
-  },
   card_number: {
     notEmpty: true,
     errorMessage: "Card Number is required",

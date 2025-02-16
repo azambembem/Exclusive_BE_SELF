@@ -7,8 +7,8 @@ import {
   update_options
 } from "../../conrollers/payment-options/index.mjs";
 import { create_options_validator } from "../../validations/body/payment-options/index.mjs";
-import { validator } from "../../middlewares/validators.mjs";
 import { checkSchema } from "express-validator";
+import { validator } from "../../middlewares/validators.mjs";
 import { jwt_auth } from "../../middlewares/jwt.mjs";
 
 const router = Router();
