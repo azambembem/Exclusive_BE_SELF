@@ -7,7 +7,6 @@ import {
 } from "../../conrollers/billing/index.mjs";
 import { checkSchema } from "express-validator";
 import { post_billing_validator } from "../../validations/body/billing/index.mjs";
-// import { jwt_auth } from "../../middlewares/jwt.mjs";
 import { jwt_auth } from "../../middlewares/jwt.mjs";
 import { validator } from "../../middlewares/validators.mjs";
 const router = Router();

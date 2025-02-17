@@ -1,7 +1,7 @@
 import userModel from "../../models/users/index.mjs";
 import billingModel from "../../models/billing/index.mjs";
 
-export const get_billing = async (req, res) => {
+export const get_billing = async (req, res, next) => {
   const { user_id } = req.params;
 
   try {
@@ -31,9 +31,7 @@ export const post_billing = async (req, res, next) => {
       phone_number
     } = req.body;
 
-    if (!user_id) {
-      throw new Error("User id is required");
-    }
+    if (!user_id) throw new Error("User id is required");
 
     const user = await userModel.findById(user_id);
 
