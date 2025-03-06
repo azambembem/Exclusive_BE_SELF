@@ -2,8 +2,9 @@ import jwt from "jsonwebtoken";
 export const jwt_auth = (req, res, next) => {
   const tokenHeader = req.headers.authorization;
 
-  if (!tokenHeader)
+  if (!tokenHeader) {
     return res.status(401).json({ success: false, message: "" });
+  }
 
   console.log("tokenHeader", tokenHeader);
 

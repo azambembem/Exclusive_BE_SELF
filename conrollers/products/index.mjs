@@ -1,4 +1,5 @@
 import productModel from "../../models/products/index.mjs";
+
 export const create_product = async (req, res) => {
   const {
     name,

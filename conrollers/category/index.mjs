@@ -36,7 +36,7 @@ export const create_categories = async (req, res) => {
 };
 
 export const update_categories = async (req, res) => {
-  const { name, id } = req.body; // yani buyerda id berish orqali category nameni uzgartirsak buladi.
+  const { name, id } = req.body; // yani buyerda create qilingan categorylarni id sini berish orqali category nameni uzgartirsak buladi.
   // 예:{ "name": "Samsung 25", "id": "67ab6e0eaaf1bd49b3a406e7"}
 
   const updatedCategory = await categoryModel.findById(id);
@@ -59,10 +59,11 @@ export const update_categories = async (req, res) => {
 };
 
 export const delete_categories = async (req, res) => {
-  const { id } = req.body; // id berish orqali categoryni delete qilinadi.
-  //{ "id": "67ab6e0eaaf1bd49b3a406e7"}
+  const { id } = req.body;
 
   const deletedCategory = await categoryModel.findByIdAndDelete(id);
+  // yani buyerda ham create qilingan categorylarni id sini berish orqali  delete qilinadi.
+  //{ "id": "67ab6e0eaaf1bd49b3a406e7"}
 
   return res.status(200).json({
     success: true,

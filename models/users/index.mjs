@@ -40,13 +40,16 @@ const userSchema = new Schema({
   },
   profile_picture: {
     type: String,
+    required: [true, "Profile picture is required."],
+    maxLength: [256, "Profile picture must be less than 256 characters."],
+    minLength: [2, "Profile picture must be at least 2 characters."],
     default:
       "https://img.freepik.com/free-vector/anonymous-avatars-grey-circles_78370-2086.jpg?ga=GA1.1.917091214.1739122099&semt=ais_hybrid"
   }
 });
 // Yangilanish vaqtini avtomatlashtirish. yani create_at bn update_at
 userSchema.post("updateOne", async function () {
-  this.update_at = Date.now(); // post // pre updateOne ??
+  this.updated_at = Date.now(); // post // pre updateOne ??
 });
 
 export default model("users", userSchema);

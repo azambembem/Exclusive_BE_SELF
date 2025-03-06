@@ -1,3 +1,5 @@
+// notiondan olib kelingan
+
 import bcrypt from "bcrypt";
 
 const hashPassword = async (password) => {

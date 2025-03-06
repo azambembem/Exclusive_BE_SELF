@@ -39,3 +39,25 @@ export const sign_up_validator = {
     errorMessage: "Password is required"
   }
 };
+
+export const profile_update_validator = {
+  first_name: {
+    errorMessage: "Invalid First Name",
+    notEmpty: true
+  },
+  last_name: {
+    errorMessage: "Invalid Last Name",
+    notEmpty: true
+  }
+};
+
+export const password_update_validator = {
+  password: {
+    isLength: {
+      options: { min: 8 },
+      errorMessage: "Password should be at least 8 chars"
+    },
+    notEmpty: true,
+    errorMessage: "Password is required"
+  }
+};
