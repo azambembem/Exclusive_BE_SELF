@@ -5,15 +5,20 @@ import routes from "./routes/index.mjs";
 import { connect } from "mongoose";
 import { error_handler } from "./middlewares/error.mjs";
 import cors from "cors";
+import bodyParser from "body-parser";
+import smtp from "./routes/smtp/index.mjs";
+
 config();
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
 
 app.use(routes);
 app.use(error_handler);
+app.use("/api/contact", smtp);
 
 app.listen(process.env.SERVER_PORT, async () => {
   await connect(process.env.MONGODB_ATLAS_URL);
