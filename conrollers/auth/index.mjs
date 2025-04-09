@@ -50,7 +50,7 @@ const sign_up = async (req, res, next) => {
     } = req.body;
 
     const hashedPassword = await hashPassword(password);
-    console.log(hashedPassword); // $2b$10$/CEk9cgzxk0p1Ahd2cNiC.2oY.1kLUAy.CRCfmmr4eWGmPDwvsHxa
+    // console.log(hashedPassword); // $2b$10$/CEk9cgzxk0p1Ahd2cNiC.2oY.1kLUAy.CRCfmmr4eWGmPDwvsHxa
 
     // console.log(hashedPassword); // password ni hashlab berdi
 

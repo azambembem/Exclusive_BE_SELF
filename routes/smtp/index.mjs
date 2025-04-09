@@ -18,9 +18,6 @@ router.post("/send-email", async (req, res) => {
       pass: process.env.EMAIL_PASS
     }
   });
-  console.log(process.env.EMAIL_USER);
-  console.log(process.env.EMAIL_PASS);
-
   // SMTP 연결 확인
   transporter.verify((error, success) => {
     if (error) {
