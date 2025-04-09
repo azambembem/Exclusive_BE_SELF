@@ -12,21 +12,33 @@ router.post("/send-email", async (req, res) => {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: parseInt(process.env.EMAIL_PORT),
+    secure: true, // 465일 경우 반드시 true
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
     }
   });
+  console.log(process.env.EMAIL_USER);
+  console.log(process.env.EMAIL_PASS);
+
+  // SMTP 연결 확인
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error("SMTP 연결 실패:", error);
+    } else {
+      console.log("SMTP 연결 성공:", success);
+    }
+  });
 
   const mailOptions = {
-    from: email,
-    to: process.env.EMAIL_TO,
+    from: `"${name}" <${process.env.EMAIL_USER}>`, // 발신자 이메일 (자기 자신)
+    to: process.env.EMAIL_TO || process.env.EMAIL_USER, // 받는 사람
     subject: `Contact from ${name}`,
     text: `
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Message: ${message}
+    Name: ${name}
+    Email: ${email}
+    Phone: ${phone}
+    Message: ${message}
     `
   };
 
@@ -34,8 +46,10 @@ router.post("/send-email", async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "Email sent successfully!" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to send email." });
+    console.error("Failed to send email:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to send email.", error: error.message });
   }
 });
 
