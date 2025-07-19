@@ -149,6 +149,25 @@ export const most_popular_monthly_products = async (req, res, next) => {
   }
 };
 
+// export const get_product_by_id = async (req, res, next) => {
+//   const { id } = req.params;
+//   try {
+//     const product = await productModel.findById(id).populate({
+//       path: "category",
+//       select: "name _id"
+//     });
+
+//     if (!product) throw new Error(`Product not found`);
+
+//     res.status(200).json({
+//       success: true,
+//       data: product
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 export const get_product_by_id = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -157,9 +176,9 @@ export const get_product_by_id = async (req, res, next) => {
       select: "name _id"
     });
 
-    if (!product) throw new Error(`Product not found`);
+    if (!product) throw new Error("Product not found");
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: product
     });
@@ -178,12 +197,12 @@ export const get_related_products = async (req, res, next) => {
 
     if (!product) throw new Error(`Product not found`);
 
-    const reletedProduct = await productModel.find({
+    const relatedProduct = await productModel.find({
       hashtags: { $in: product.hashtags }
     });
     res.status(200).json({
       success: true,
-      data: reletedProduct
+      data: reltedProduct
     });
   } catch (error) {
     next(error);

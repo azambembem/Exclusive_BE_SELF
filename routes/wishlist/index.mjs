@@ -5,9 +5,9 @@ import {
   delete_wishlist
 } from "../../conrollers/wishlist/index.mjs";
 import { jwt_auth } from "../../middlewares/jwt.mjs";
-import { checkSchema } from "express-validator";
-import { validator } from "../../middlewares/validators.mjs";
 import { create_wishlist_validator } from "../../validations/body/wishlist/index.mjs";
+import { validator } from "../../middlewares/validators.mjs";
+import { checkSchema } from "express-validator";
 
 const router = Router();
 

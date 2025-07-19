@@ -23,7 +23,7 @@ app.use("/api/contact", smtp);
 app.listen(process.env.SERVER_PORT, async () => {
   await connect(process.env.MONGODB_ATLAS_URL);
 
-  //   const conn_res = await connect(process.env.MONGODB_ATLAS_URL);
-  //   console.log(conn_res); // atas bn connect bulgani tekshirish
+  // const conn_res = await connect(process.env.MONGODB_ATLAS_URL);
+  // console.log(conn_res); // atas bn connect bulgani tekshirish
   console.log(`Server is running on port ${process.env.SERVER_PORT}`);
 });

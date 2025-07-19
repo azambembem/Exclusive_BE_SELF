@@ -12,7 +12,7 @@ router.post("/send-email", async (req, res) => {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: parseInt(process.env.EMAIL_PORT),
-    secure: true, // 465일 경우 반드시 true
+    secure: false, // 465일 경우 반드시 true
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS

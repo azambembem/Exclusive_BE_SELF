@@ -17,8 +17,8 @@ router.post("/", jwt_auth, create_product); // post yaratib beradi
 router.put("/", jwt_auth, update_product); // put bersa update qiladi
 router.delete("/", jwt_auth, delete_product); // delete bersa delete qiladi
 router.get("/", get_product); // get nima borligi hammasini korsatib beradi
-router.get("/get-by-id/:id", get_product_by_id);
-router.get("/releted/:id", get_related_products);
+router.get("/related/:id", get_related_products);
 router.get("/most-popular", most_popular_monthly_products);
 router.get("/most-popular-monthly", most_popular_monthly_products);
+router.get("/:id", get_product_by_id);
 export default router;
