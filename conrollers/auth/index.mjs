@@ -72,7 +72,7 @@ const sign_up = async (req, res, next) => {
     });
 
     return res.status(200).json({
-      succses: true,
+      success: true,
       data: {
         user: userCredentials,
         token
