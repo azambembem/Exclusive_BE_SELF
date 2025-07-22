@@ -35,8 +35,7 @@ router.get(
     const token = generateToken({ _id: req.user._id, email: req.user.email });
 
     // Frontendga redirect qilamiz token bilan
-    // res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
-    res.redirect(`http://localhost:5173/?token=${token}`);
+    res.redirect(`http://localhost:5173/oauth-success?token=${token}`);
   }
 );
 
