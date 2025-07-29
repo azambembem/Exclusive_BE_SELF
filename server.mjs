@@ -37,9 +37,4 @@ app.listen(process.env.SERVER_PORT, async () => {
   // const conn_res = await connect(process.env.MONGODB_ATLAS_URL);
   // console.log(conn_res); // atas bn connect bulgani tekshirish
   console.log(`Server is running on port ${process.env.SERVER_PORT}`);
-  console.log("Google client ID in passport:", process.env.GOOGLE_CLIENT_ID);
-  console.log(
-    "Google client SECRET in passport:",
-    process.env.GOOGLE_CLIENT_SECRET
-  );
 });

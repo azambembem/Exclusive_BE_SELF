@@ -19,4 +19,3 @@ router.use("/wishlist", wishlist_route);
 router.use("/purchase", purchase_route);
 
 export default router;
-// localhost://8080 /auth/sign-in

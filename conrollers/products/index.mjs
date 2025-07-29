@@ -38,10 +38,6 @@ export const get_product = async (req, res) => {
     path: "category", // ??
     select: "name _id" // ??
   });
-  // .populate({
-  //   path: "created_by",
-  //   select: "name email"
-  // });
 
   res.status(200).json({
     success: true,
